@@ -1,0 +1,31 @@
+name: Automation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  automation:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          pip install robotframework
+          pip install --upgrade robotframework-seleniumlibrary
+          mkdir drivers
+          mv path/to/chromedriver.exe drivers/
+
+      - name: Run Tests
+        run: |
+          cd BlogAgi_Automation\Tests
+          robot Principal.robot
